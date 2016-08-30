@@ -1,0 +1,20 @@
+html,body{
+	padding:0px;
+	margin:0px;
+}
+body{
+	padding-top: 70px;
+}
+#panel-login{
+	margin-top: 25%;
+}
+.panel-primary > .panel-heading{
+	color:#FFF !important;
+	background: #5cb85c !important;
+	background-color: #5cb85c !important;
+}
+.panel-primary ,.panel-heading{
+	color:#FFF !important;
+	background: #5cb85c !important;
+    border-color: #5cb85c !important;
+}
