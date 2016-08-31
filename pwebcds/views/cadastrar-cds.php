@@ -3,8 +3,9 @@
       <div class="panel panel-success">
         <!-- Default panel contents -->
         <div class="panel-body">
-          <form id="form-cds" method="POST">
+          <form id="form-cds" enctype="multipart/form-data">
           	<input type="hidden" value="cadastrar" name="operation">
+            <input type="hidden" name="MAX_FILE_SIZE" value="15728640">
             <h1>Novo CD</h1>
             <div class="form-group">
               <label for="titilo">Título</label>
@@ -44,11 +45,20 @@
      
       // Stop form from submitting normally
       event.preventDefault();
+      var form = $(this);
+      var formdata = false;
+      if (window.FormData){
+          formdata = new FormData(form[0]);
+      }
       $.ajax({
          url: '../controllers/cd.controller.php',
          type: 'POST',
-         data:$(this).serialize(),
+         data: formdata ? formdata : form.serialize(),
+         cache       : false,
+         contentType : false,
+         processData : false,
          success: function(data) {
+            console.log(data);
             if(data.response.status == "success"){
               $("#titulo").val("");
               $("#data").val(getDate());

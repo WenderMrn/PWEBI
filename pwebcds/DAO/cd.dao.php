@@ -79,8 +79,8 @@ class DAOCD implements IDAO{
 		        cd.release_year,
 		        singer.name as singer_name,
 		        singer.code as singer_code
-				FROM cd LEFT OUTER JOIN singer
-				ON cd.code = singer.code";
+				FROM cd INNER JOIN singer
+				ON cd.singer = singer.code";
 		   
 		        $p_sql = Connection::getInstance()->prepare($sql);
 		        $p_sql->execute();
