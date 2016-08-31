@@ -50,6 +50,7 @@
          type: 'POST',
          data:$(this).serialize(),
          success: function(data) {
+            console.log(data);
             if(data.response.status == "success"){
                location.reload();
             }else{

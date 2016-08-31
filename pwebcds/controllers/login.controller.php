@@ -8,7 +8,9 @@
 				try {
 					$daouser = new DAOUser();
 					$user = $daouser->readByLogin($_POST['login']);
-					if($user != null){
+					
+					if($user != null && $user instanceof User){
+						 
 						if($user->getPassword() == crypt($_POST['password'],CRYPT_SALT_LENGTH)){
 							$_SESSION['user'] = $user;
 							$response['response'] = array(

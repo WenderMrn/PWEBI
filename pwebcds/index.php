@@ -1,5 +1,5 @@
 <?php
-session_start();
+  session_start();
   if(isset($_SESSION['user']))
     header("Location:views/index.php");
 ?>
@@ -14,7 +14,6 @@ session_start();
   <link rel="stylesheet" href="assets/css/style.css">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="assets/lib/bootstrap/dist/css/bootstrap.css">
-
   <!-- Custom styles for this template -->
   <link rel="stylesheet" href="assets/css/carousel.css">
 
