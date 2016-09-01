@@ -3,7 +3,7 @@
 
 	try {
 
-		echo "<h1>Cadastro de Usuário</h1>";
+		/*echo "<h1>Cadastro de Usuário</h1>";
 		$user = new User("Joao da Silva","joaosilva",crypt("123",CRYPT_SALT_LENGTH));
 		$daouser = new DAOUser();
 		echo $daouser->create($user);
@@ -54,7 +54,10 @@
 		echo "<h1>Listar CDs</h1>";
 		$daocd = new DAOCD();
 		
-		var_dump($daocd->readAll());
+		var_dump($daocd->readAll());*/
+
+		$daocd = new DAOCD();
+		var_dump($daocd->read('bruno mars'));
 
 	} catch (Exception $e) {
 		echo $e->getMessage();		

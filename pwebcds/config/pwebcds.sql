@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 30-Ago-2016 às 04:38
+-- Generation Time: 01-Set-2016 às 15:58
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -39,14 +39,11 @@ CREATE TABLE `cd` (
 --
 
 INSERT INTO `cd` (`code`, `title`, `photo`, `release_year`, `singer`) VALUES
-(62, 'A Primeira Pedra', '', '2016-08-29', 2),
-(63, 'Chuva no Mar', '', '2016-08-29', 2),
-(64, 'Esqueça', '', '2016-08-29', 2),
-(65, 'Volta Meu Amor', '', '2016-08-29', 2),
-(66, 'Alta Noite', '', '2016-08-29', 2),
-(67, 'It Will Rain', '', '2015-10-27', 3),
-(68, 'The Lazy Song', '', '2016-08-29', 3),
-(69, 'Count On Me', '', '2016-08-29', 3);
+(108, 'It Will Rain', '../assets/img/capas/c19ef2e10f923e65d92d2fc4b02b2d4a.jpg', '2016-08-31', 3),
+(112, 'Ainda Bem', '../assets/img/capas/b8c52a79c522794e016a3dda65f3a0e4.jpg', '2013-08-31', 2),
+(113, 'Just The Way', '../assets/img/capas/4740285cbfc313e9af90569d960cde9d.jpg', '2016-09-01', 3),
+(114, 'Depois', '../assets/img/capas/60185c6df1c6210d1880ac04da8fe2ee.jpg', '2016-09-22', 2),
+(115, 'Ela só quer paz', '../assets/img/capas/a9da4350b160a4a497259b4b0af85733.jpg', '2016-09-01', 1);
 
 -- --------------------------------------------------------
 
@@ -65,6 +62,7 @@ CREATE TABLE `singer` (
 
 INSERT INTO `singer` (`code`, `name`) VALUES
 (3, 'Bruno Mars'),
+(24, 'Gilvan Tenorio'),
 (2, 'Marisa Monte'),
 (1, 'Projota'),
 (23, 'Selena Gomez');
@@ -90,7 +88,9 @@ INSERT INTO `user` (`code`, `name`, `login`, `password`) VALUES
 (5, 'Joao da Silva', 'joaosilva', '12IbR.gJ8wcpc'),
 (14, 'Filipe Farias', 'ff', '12IbR.gJ8wcpc'),
 (19, 'Jhon Jones', 'jhon', '12IbR.gJ8wcpc'),
-(20, 'Jorge Carlos', 'jc', '12Bz/9hNlPLZk');
+(20, 'Jorge Carlos', 'jc', '12Bz/9hNlPLZk'),
+(21, 'Fernando', 'nando', '12IbR.gJ8wcpc'),
+(22, 'Joao', 'Joao', '12IbR.gJ8wcpc');
 
 --
 -- Indexes for dumped tables
@@ -125,17 +125,17 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cd`
 --
 ALTER TABLE `cd`
-  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 --
 -- AUTO_INCREMENT for table `singer`
 --
 ALTER TABLE `singer`
-  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
