@@ -18,7 +18,6 @@
             <div class="form-group">
             	<label for="cantores">Cantor</label>
 	            <select id="cantores" class="form-control" name="singer" placeholder="cantor">
-				        <option></option>
 				      </select>
 			</div>	
             <div class="form-group">
@@ -37,7 +36,10 @@
   <script>
     function getDate(){
       var date = new Date();
-      return date.getFullYear()+"-"+(eval(date.getMonth()+1) < 10?"0"+eval(date.getMonth()+1):eval(date.getMonth()+1))+"-"+date.getDate();
+      var month = (eval(date.getMonth()+1) < 10?"0"+eval(date.getMonth()+1):eval(date.getMonth()+1));
+      var day = (date.getDate() < 10)?"0"+date.getDate():"";
+
+      return date.getFullYear()+"-"+month+"-"+day;
     }
     $("#data").val(getDate());
     // Attach a submit handler to the form

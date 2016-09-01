@@ -17,8 +17,8 @@ class DAOCD implements IDAO{
 		   
 		    $p_sql = Connection::getInstance()->prepare($sql);
 		   
-		    $p_sql->bindParam(":title", $obj->getTitle(),PDO::PARAM_STR);
-		    $p_sql->bindParam(":photo", $obj->getPhoto(),PDO::PARAM_STR);
+		    $p_sql->bindParam(":title",$obj->getTitle(),PDO::PARAM_STR);
+		    $p_sql->bindParam(":photo",$obj->getPhoto(),PDO::PARAM_STR);
 		    $p_sql->bindParam(":release_year",$obj->getReleaseYear(),PDO::PARAM_STR);
 		    $p_sql->bindParam(":singer",$obj->getSinger(),PDO::PARAM_INT);
 		        
@@ -29,7 +29,7 @@ class DAOCD implements IDAO{
 		  return $e->getMessage();
 		}
 	}
-	public function read($key1="",$key2="",$key3=""){
+	public function read($key=""){
 		try {
 
 		        $sql = "SELECT 
@@ -39,21 +39,18 @@ class DAOCD implements IDAO{
 		        cd.release_year,
 		        singer.name as singer_name,
 		        singer.code as singer_code
-				FROM cd LEFT OUTER JOIN singer
+				FROM cd INNER JOIN singer
 				ON cd.singer=singer.code WHERE 
-				(singer.name = :key1 OR cd.title = :key1 OR cd.release_year = :key1) OR
-				(singer.name LIKE '%:key2%' AND cd.title LIKE '%:key1%' AND cd.release_year LIKE '%:key3%') ORDER BY cd.code";
+				LOWER(singer.name) LIKE LOWER(:key) OR LOWER(cd.title) LIKE LOWER(:key) OR LOWER(cd.release_year) LIKE LOWER(:key) ORDER BY cd.code";
 		   
 		        $p_sql = Connection::getInstance()->prepare($sql);
 		   		
-		        $p_sql->bindValue(":key1",$key1);
-		        $p_sql->bindValue(":key2",$key2);
-		        $p_sql->bindValue(":key3",$key3);
+		        $p_sql->bindValue(":key","%$key%");
 		        $p_sql->execute();
   				
   				$result = $p_sql->fetchAll();
 
-  				$cd = null;	
+  				$cds = array();	
 		        foreach ($result as $row) {
 		        	$cd = new CD();
 		        	$cd->setCode($row['code']);
@@ -61,9 +58,9 @@ class DAOCD implements IDAO{
 		        	$cd->setPhoto($row['photo']);
 		        	$cd->setReleaseYear($row['release_year']);
 		        	$cd->setSinger(new Singer($row['singer_name'],$row['singer_code']));
-		        	return $cd;	
+		        	array_push($cds,$cd);	
 		        }
-		        return $cd;
+		        return $cds;
 		         
 		} catch (Exception $e) {
 		   //throw $e->getMessage();
@@ -104,6 +101,29 @@ class DAOCD implements IDAO{
 		   return $e->getMessage();
 		}
 	}
+	public function readByCode($code) {
+		try {
+
+		        $sql = "SELECT * FROM cd WHERE code = :code";
+		   
+		        $p_sql = Connection::getInstance()->prepare($sql);
+		   		
+		        $p_sql->bindParam(":code",$code,PDO::PARAM_STR);
+		        $p_sql->execute();
+
+		        $p_sql->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,"CD");
+		          
+		        $result = $p_sql->fetchAll();
+		        
+		        if(count($result) > 0)
+		        	return $result[0];
+		      	else
+		      	 	return null;
+		         
+		} catch (Exception $e) {
+		   throw $e->getMessage();
+		}
+	}
 	public function  update($obj){
 		try {
 		    $sql = "UPDATE cd set 
@@ -120,10 +140,13 @@ class DAOCD implements IDAO{
 		   $p_sql->bindParam(":photo", $obj->getPhoto(),PDO::PARAM_STR);
 		   $p_sql->bindParam(":release_year",$obj->getReleaseYear(),PDO::PARAM_STR);
 		   
-		   if($obj->getSinger() != null)
+		   if($obj->getSinger() instanceof Singer)
 		   		$p_sql->bindParam(":singer",$obj->getSinger()->getCode(),PDO::PARAM_INT);
-		   else
+		   else if($obj->getSinger() != null){
+		   		$p_sql->bindParam(":singer",$obj->getSinger(),PDO::PARAM_INT);
+		   }else{
 		  		$p_sql->bindValue(":singer",0); 
+		   }
 		   
 		   return $p_sql->execute();
    
@@ -132,6 +155,7 @@ class DAOCD implements IDAO{
 		   return $e->getMessage();
 		}		
 	}
+
 	public function delete($key) {
 		try {
 
@@ -148,5 +172,6 @@ class DAOCD implements IDAO{
 		  return $e->getMessage();
 		}
 	}
+
 }
 ?>

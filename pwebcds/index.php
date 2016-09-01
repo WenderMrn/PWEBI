@@ -34,9 +34,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="contact-list.php" id="home">
+          <a class="navbar-brand" href="" id="home">
             <!--<img alt="Home" src="#">-->
-            Agenda
+            PWEBCDS
           </a>
         </div>
       </div>

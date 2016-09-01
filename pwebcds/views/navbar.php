@@ -1,4 +1,4 @@
-<? require_once "../config/imports.all.php";
+<?php require_once "../config/imports.all.php";
 session_start();
   if(!isset($_SESSION['user']))
     header("Location:../index.php");

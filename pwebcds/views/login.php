@@ -38,7 +38,11 @@
   </div>
   <div id="server-message" class="col-md-4 col-md-offset-4">
    
-  </div> 
+  </div>
+  <footer class="container-fluid">
+    <a href="api/public.php?cds=json" class="btn btn-info btn-xs" role="button">API JSON</a>
+    <a href="api/public.php?cds=xml" class="btn btn-warning btn-xs" role="button">API XML</a>
+  </footer>
 <script>
     // Attach a submit handler to the form
     $("#form-login").submit(function( event ) {

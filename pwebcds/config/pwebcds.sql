@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 31-Ago-2016 às 19:34
+-- Generation Time: 01-Set-2016 às 15:58
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -39,14 +39,11 @@ CREATE TABLE `cd` (
 --
 
 INSERT INTO `cd` (`code`, `title`, `photo`, `release_year`, `singer`) VALUES
-(62, 'A Primeira Pedra', '', '2016-08-29', 2),
-(63, 'Chuva no Mar', '', '2016-08-29', 2),
-(65, 'Volta Meu Amor', '', '2016-08-29', 2),
-(68, 'The Lazy Song', '', '2016-08-29', 3),
-(69, 'Count On Me', '', '2016-08-29', 3),
-(71, 'Gorilla', '', '2016-08-29', 3),
-(89, 'Just The Way', '../assets/img/capas/06afd0cc55017d1e4762e3103126161fbruno.jpg', '2016-08-31', 3),
-(91, 'It Will Rain', '../assets/img/capas/805b794a56523467976a9d75e1c1dbf0download.jpg', '2016-08-02', 3);
+(108, 'It Will Rain', '../assets/img/capas/c19ef2e10f923e65d92d2fc4b02b2d4a.jpg', '2016-08-31', 3),
+(112, 'Ainda Bem', '../assets/img/capas/b8c52a79c522794e016a3dda65f3a0e4.jpg', '2013-08-31', 2),
+(113, 'Just The Way', '../assets/img/capas/4740285cbfc313e9af90569d960cde9d.jpg', '2016-09-01', 3),
+(114, 'Depois', '../assets/img/capas/60185c6df1c6210d1880ac04da8fe2ee.jpg', '2016-09-22', 2),
+(115, 'Ela só quer paz', '../assets/img/capas/a9da4350b160a4a497259b4b0af85733.jpg', '2016-09-01', 1);
 
 -- --------------------------------------------------------
 
@@ -128,12 +125,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `cd`
 --
 ALTER TABLE `cd`
-  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 --
 -- AUTO_INCREMENT for table `singer`
 --
 ALTER TABLE `singer`
-  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `user`
 --
