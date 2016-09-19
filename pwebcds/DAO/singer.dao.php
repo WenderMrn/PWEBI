@@ -10,8 +10,8 @@ class DAOSinger implements IDAO{
 		        :name)";
 		   
 		    $p_sql = Connection::getInstance()->prepare($sql);
-		   
-		    $p_sql->bindParam(":name", $obj->getName(),PDO::PARAM_STR);  
+		   	$name = $obj->getName();
+		    $p_sql->bindParam(":name",$name,PDO::PARAM_STR);  
 
 		  	return $p_sql->execute();      
 
@@ -64,9 +64,10 @@ class DAOSinger implements IDAO{
 		     WHERE code =:code";
 
 		   $p_sql = Connection::getInstance()->prepare($sql);
-
-		   $p_sql->bindParam(":code", $obj->getCode(),PDO::PARAM_INT);
-		   $p_sql->bindParam(":name", $obj->getName(),PDO::PARAM_STR);
+		   $code = $obj->getCode();
+		   $name = $obj->getName();
+		   $p_sql->bindParam(":code", $code,PDO::PARAM_INT);
+		   $p_sql->bindParam(":name",$name,PDO::PARAM_STR);
 		   
 		   return $p_sql->execute();
    
@@ -83,8 +84,12 @@ class DAOSinger implements IDAO{
 		    $p_sql = Connection::getInstance()->prepare($sql);
 		    
 		    if($key instanceof Singer){
-		    	$p_sql->bindValue(":code",$key->getCode());
-		   		$p_sql->bindValue(":name",$key->getName());
+		    	
+		    	$code = $key->getCode();
+		    	$key->getName();
+
+		    	$p_sql->bindValue(":code",$code);
+		   		$p_sql->bindValue(":name",$name);
 		    }else{
 		    	$p_sql->bindValue(":code",$key);
 		   		$p_sql->bindValue(":name",$key);

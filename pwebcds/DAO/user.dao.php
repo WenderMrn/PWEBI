@@ -14,10 +14,14 @@ class DAOUser implements IDAO{
 		              :password)";
 		   
 		          $p_sql = Connection::getInstance()->prepare($sql);
-		   
-		          $p_sql->bindParam(":name", $obj->getName(),PDO::PARAM_STR);
-		          $p_sql->bindParam(":login", $obj->getLogin(),PDO::PARAM_STR);
-		          $p_sql->bindParam(":password", $obj->getPassword(),PDO::PARAM_STR);
+
+		          $name = $obj->getName();
+		          $login = $obj->getLogin();
+		          $password = $obj->getPassword();	
+		   			
+		          $p_sql->bindParam(":name", $name,PDO::PARAM_STR);
+		          $p_sql->bindParam(":login", $login,PDO::PARAM_STR);
+		          $p_sql->bindParam(":password",$password,PDO::PARAM_STR);
 		        
 		      return $p_sql->execute();      
 
@@ -81,11 +85,16 @@ class DAOUser implements IDAO{
 		     WHERE code =:code";
 		   
 		    $p_sql = Connection::getInstance()->prepare($sql);
-
-		   	$p_sql->bindParam(":code",$obj->getCode(),PDO::PARAM_INT);
-		    $p_sql->bindParam(":name",$obj->getName(),PDO::PARAM_SRT);
-		    $p_sql->bindParam(":login",$obj->getLogin(),PDO::PARAM_SRT);
-		    $p_sql->bindParam(":password",$obj->getPassword(),PDO::PARAM_SRT);
+		    
+		    $code = $obj->getCode();
+		    $name = $obj->getName();
+		    $login = $obj->getLogin(); 
+		   	$password = $obj->getPassword();
+		   	
+		   	$p_sql->bindParam(":code",$code,PDO::PARAM_INT);
+		    $p_sql->bindParam(":name",$name,PDO::PARAM_SRT);
+		    $p_sql->bindParam(":login",$login,PDO::PARAM_SRT);
+		    $p_sql->bindParam(":password",$password,PDO::PARAM_SRT);
 		    
 		    return $p_sql->execute();
    

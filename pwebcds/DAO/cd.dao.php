@@ -17,10 +17,15 @@ class DAOCD implements IDAO{
 		   
 		    $p_sql = Connection::getInstance()->prepare($sql);
 		   
-		    $p_sql->bindParam(":title",$obj->getTitle(),PDO::PARAM_STR);
-		    $p_sql->bindParam(":photo",$obj->getPhoto(),PDO::PARAM_STR);
-		    $p_sql->bindParam(":release_year",$obj->getReleaseYear(),PDO::PARAM_STR);
-		    $p_sql->bindParam(":singer",$obj->getSinger(),PDO::PARAM_INT);
+		   	$title = $obj->getTitle();
+		   	$photo = $obj->getPhoto();
+		   	$release_year = $obj->getReleaseYear();
+		   	$singer = $obj->getSinger();
+
+		    $p_sql->bindParam(":title",$title,PDO::PARAM_STR);
+		    $p_sql->bindParam(":photo",$photo,PDO::PARAM_STR);
+		    $p_sql->bindParam(":release_year",$release_year,PDO::PARAM_STR);
+		    $p_sql->bindParam(":singer",$singer,PDO::PARAM_INT);
 		        
 		  return $p_sql->execute();      
 
@@ -133,17 +138,26 @@ class DAOCD implements IDAO{
 			    singer = :singer
 		     WHERE code =:code";
 
-		   $p_sql = Connection::getInstance()->prepare($sql);  
+		   $p_sql = Connection::getInstance()->prepare($sql); 
 
-		   $p_sql->bindParam(":code", $obj->getCode(),PDO::PARAM_INT);
-		   $p_sql->bindParam(":title", $obj->getTitle(),PDO::PARAM_STR);
-		   $p_sql->bindParam(":photo", $obj->getPhoto(),PDO::PARAM_STR);
-		   $p_sql->bindParam(":release_year",$obj->getReleaseYear(),PDO::PARAM_STR);
+		   	$code = $obj->getCode();
+		   	$title = $obj->getTitle();
+		   	$photo = $obj->getPhoto();
+		   	$release_year = $obj->getReleaseYear();
+		   	$singer = $obj->getSinger(); 
+
+		   $p_sql->bindParam(":code",$code,PDO::PARAM_INT);
+		   $p_sql->bindParam(":title",$title,PDO::PARAM_STR);
+		   $p_sql->bindParam(":photo",$photo,PDO::PARAM_STR);
+		   $p_sql->bindParam(":release_year",$release_year,PDO::PARAM_STR);
 		   
-		   if($obj->getSinger() instanceof Singer)
-		   		$p_sql->bindParam(":singer",$obj->getSinger()->getCode(),PDO::PARAM_INT);
+		   if($obj->getSinger() instanceof Singer){
+
+		   		$p_sql->bindParam(":singer",$code,PDO::PARAM_INT);
+		   }
 		   else if($obj->getSinger() != null){
-		   		$p_sql->bindParam(":singer",$obj->getSinger(),PDO::PARAM_INT);
+
+		   		$p_sql->bindParam(":singer",$singer,PDO::PARAM_INT);
 		   }else{
 		  		$p_sql->bindValue(":singer",0); 
 		   }

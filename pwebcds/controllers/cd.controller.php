@@ -9,20 +9,25 @@
 				
 				$daocd = new DAOCD();
 				$uploadresult = uploadPhoto($_FILES['photo']);
-				$cd = new CD($_POST['title'],$uploadresult['path'],$_POST['release_year'],$_POST['singer']);
+
+				$title = $_POST['title']; 
+				$release_year = $_POST['release_year'];
+				$singer = $_POST['singer'];
+
+				$cd = new CD($title,$uploadresult['path'],$release_year,$singer);
 				$result = $daocd->create($cd); 
-				
+				$response = array();
 				if($result == 1){
 					$response['response'] = array(
 	    							'status' => 'success',
 	    							'code' => '1',
-	    							'message' => 'CD '.$_POST['title'].', cadastrado com sucesso.',
+	    							'message' => 'CD '.$title.', cadastrado com sucesso.',
 	  							);
 				}else{
 					$response['response'] = array(
 	    							'status' => 'error',
 	    							'code' => '-1',
-	    							'message' => 'CD '.$_POST['title'].', já está cadastrado.',
+	    							'message' => 'CD '.$title.', já está cadastrado.',
 	  							);
 				}
 				
@@ -39,7 +44,7 @@
 				# code...
 				$daocd = new DAOCD();
 				$result = $daocd->readAll();
-				
+				$response = array();
 				$response['response'] = array(
 	    					'status' => 'success',
 	    					'code' => '1',
@@ -60,7 +65,7 @@
 				# code...
 				$daocd = new DAOCD();
 				$result = $daocd->read($_POST['key']);
-				
+				$response = array();
 				$response['response'] = array(
 	    					'status' => 'success',
 	    					'code' => '1',
@@ -88,14 +93,15 @@
 						$photo = $uploadresult['path'];
 
 						if(!empty($_POST['photo_old']))
-						  unlink($_POST['photo_old']);
+						  @unlink($_POST['photo_old']);
 					}
 				}
-
+				$daocd = new DAOCD();
 				$cd = new CD($_POST['title'],$photo,$_POST['release_year'],$_POST['singer']);
 				$cd->setCode($_POST['code']);
 
 				$result = $daocd->update($cd);
+				$response = array();
 				if($result == 1){
 					$response['response'] = array(
 	    					'status' => 'success',
@@ -125,11 +131,11 @@
 				$daocd = new DAOCD();
 				
 				$cd = $daocd->readByCode($_POST['code']);
-				
+				$response = array();
 				if($cd instanceof CD){
 					$result = $daocd->delete($_POST['code']);
 					if($result == 1 && !empty($cd->photo)){
-						unlink($cd->photo);
+						@unlink($cd->photo);
 					}
 
 					$response['response'] = array(
